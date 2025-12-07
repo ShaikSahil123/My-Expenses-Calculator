@@ -72,9 +72,9 @@ with tab1:
         balance = money_in - money_out
 
         col1, col2, col3 = st.columns(3)
-        col1.metric("TOTAL INCOME", f"${money_in:,.2f}", delta="Money In")
-        col2.metric("TOTAL SPENT", f"${money_out:,.2f}", delta="-Money Out", delta_color="inverse")
-        col3.metric("NET BALANCE", f"${balance:,.2f}", delta="Savings")
+        col1.metric("TOTAL INCOME", f"₹{money_in:,.2f}", delta="Money In")
+        col2.metric("TOTAL SPENT", f"₹{money_out:,.2f}", delta="-Money Out", delta_color="inverse")
+        col3.metric("NET BALANCE", f"₹{balance:,.2f}", delta="Savings")
         
         st.divider()
 
@@ -118,7 +118,7 @@ with tab1:
                 barmode='group'   # Groups bars side-by-side instead of stacking
             )
             # Make the chart background clean
-            fig_bar.update_layout(xaxis_title="Date", yaxis_title="Amount ($)")
+            fig_bar.update_layout(xaxis_title="Date", yaxis_title="Amount (₹)")
             st.plotly_chart(fig_bar, use_container_width=True)
 
     else:
@@ -136,7 +136,7 @@ with tab2:
             trans_type = st.selectbox("What Type?", ["Expense", "Income", "Debt Given", "Debt Repaid"])
         
         with col_b:
-            amount_val = st.number_input("Amount ($)", min_value=0.0, format="%.2f")
+            amount_val = st.number_input("Amount (₹)", min_value=0.0, format="%.2f")
             
             # Smart Labels
             if trans_type == "Expense":
@@ -158,7 +158,7 @@ with tab2:
         if submitted:
             if category_val and amount_val > 0:
                 save_data(date_val, trans_type, category_val, amount_val, notes_val)
-                st.success(f"Saved: ${amount_val} for {category_val}")
+                st.success(f"Saved: ₹{amount_val} for {category_val}")
                 st.rerun()
             else:
                 st.error("Please ensure Amount is > 0 and Category is filled.")
@@ -175,9 +175,9 @@ with tab3:
         st.markdown("### 🗑️ Remove a Mistake")
         
         # Create a readable list for the dropdown
-        # Format: "Row [0] | 2023-10-01 | Expense | Food | $500"
+        # Format: "Row [0] | 2023-10-01 | Expense | Food | ₹500"
         delete_options = [
-            f"Row [{i}] | {row['Date']} | {row['Type']} | {row['Category']} | ${row['Amount']}" 
+            f"Row [{i}] | {row['Date']} | {row['Type']} | {row['Category']} | ₹{row['Amount']}" 
             for i, row in df.iterrows()
         ]
         
