@@ -162,7 +162,7 @@ with tab2:
             date_val = st.date_input("Date", datetime.today())
         
         with col_b:
-            amount_val = st.number_input("Amount ($)", min_value=0.0, format="%.2f")
+            amount_val = st.number_input("Amount (₹)", min_value=0.0, format="%.2f")
         
         # The label here now updates correctly because 'trans_type' is outside
         category_val = st.text_input(label_text, placeholder=ph_text)
@@ -198,9 +198,9 @@ with tab3:
         st.markdown("### 🗑️ Delete an Entry")
         
         # Create a list for the dropdown that INCLUDES the unique ID
-        # Format: "ID: 5 | 2023-10-01 | Expense | Food | $50.0"
+        # Format: "ID: 5 | 2023-10-01 | Expense | Food | ₹50.0"
         delete_options = [
-            f"ID: {i} | {row['Date'].strftime('%Y-%m-%d')} | {row['Type']} | {row['Category']} | ${row['Amount']}" 
+            f"ID: {i} | {row['Date'].strftime('%Y-%m-%d')} | {row['Type']} | {row['Category']} | ₹{row['Amount']}" 
             for i, row in all_data.iterrows()
         ]
         
